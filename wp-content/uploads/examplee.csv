@@ -1,0 +1,5 @@
+FilterType;Product;#Supported values – Product, Category,Sku;;;
+DiscountType;FixedDiscount;#Supported values – FixedDiscount, FixedCost, Percentage;;;
+;;;;;
+Filter;DiscountedPrice;FromQty;ToQty;Role;
+King Halim;2;;;Reseller;# 4 - Role Discount

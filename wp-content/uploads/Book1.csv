@@ -1,0 +1,6 @@
+FilterType,Sku,,,
+DiscountType,FixedCost,,,
+,,,,
+Filter,DiscountedPrice,FromQty,ToQty,Role
+MG-RG-01,5575,,,Reseller
+MG-RG-01,5825,,,Distributor
