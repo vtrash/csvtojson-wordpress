@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+      :root {
+        font-family: "Poppins";
+      }
+
+      body {
+        background-color: #181818;
+        color: #fffdef;
+      }
+
+      .wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      button {
+        position: relative;
+        font-size: 0.9em;
+        padding: 0.7em 1.4em;
+        background-color: #bf0426;
+        text-decoration: none;
+        border: none;
+        border-radius: 0.5em;
+        color: #fffdef;
+      }
+
+      button::before {
+        position: absolute;
+        content: "";
+        height: 0;
+        width: 0;
+        top: 0;
+        left: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(33, 33, 33, 1) 0%,
+          rgba(33, 33, 33, 1) 50%,
+          rgba(150, 4, 31, 1) 50%,
+          rgba(191, 4, 38, 1) 60%
+        );
+        border-radius: 0 0 0.5em 0;
+        transition: 0.3s;
+      }
+
+      button:hover::before {
+        width: 1.6em;
+        height: 1.6em;
+      }
+
+      button:active {
+        transform: translate(0.1em, 0.1em);
+      }
+      .mt {
+        margin-top: 3rem;
+      }
+
+      .custom-file-upload {
+        display: inline-block;
+        padding: 0.7em 3.5em;
+        background-color: #bf0426;
+        color: #fffdef;
+        text-decoration: none;
+        border: none;
+        border-radius: 0.5em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .custom-file-upload:hover {
+        background-color: #9d021f;
+      }
+      .iconAnjay {
+        padding-right: 5px;
+      }
+
+      .custom-convert-button {
+        display: inline-block;
+        padding: 0.7em 1.4em;
+        background-color: #bf0426;
+        color: #fffdef;
+        text-decoration: none;
+        border: none;
+        border-radius: 0.5em;
+
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .custom-convert-button i {
+        margin-right: 5px; /* Adjust space between icon and text */
+      }
+
+      .custom-convert-button:hover {
+        background-color: #9d021f;
+      }
+
+      table {
+        border-collapse: collapse;
+        table-layout: fixed;
+        width: 120vh;
+      }
+
+      th,
+      td {
+        border: none;
+        padding: 20px;
+      }
+
+      tr {
+        background-color: #252525;
+      }
+
+      tr:nth-child(even) {
+        background-color: #424242;
+      }
+      .wrapper {
+        text-align: center;
+        overflow: auto;
+        border-radius: 0.5em;
+        border: 0px solid #bf0426; /* Add this line to see the border-radius */
+        margin: auto;
+        width: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .tr-header {
+        background-image: linear-gradient(to bottom right, #ff416c, #ff4b2b);
+      }
+      .highlight {
+        background-image: linear-gradient(to bottom right, #f7ff00, #db36a4);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1 class="mt">Convert CSV to JSON</h1>
+      <form method="post" enctype="multipart/form-data">
+        <label for="csv_file" class="custom-file-upload">
+          <i class="fas fa-file-csv iconAnjay"></i> Select CSV File
+        </label>
+        <input
+          id="csv_file"
+          class="inputFile"
+          type="file"
+          name="csv_file"
+          accept=".csv"
+          style="display: none"
+        />
+        <button
+          style="display: none"
+          class="buttonConvert"
+          type="submit"
+          name="convert_csv"
+          value="Convert"
+        >
+          Convert
+        </button>
+        <label for="convert_csv" class="custom-convert-button">
+          <i class="fas fa-sync-alt"></i> Convert
+        </label>
+        <input
+          id="convert_csv"
+          class="buttonConvert"
+          type="submit"
+          name="convert_csv"
+          value="Convert"
+          style="display: none"
+        />
+      </form>
+
+      <button class="buttonCopy" onclick="copyJSON()">
+        Copy Rules ke Clipboard
+      </button>
+      <div class="wrapper">
+        <table class="tableAnjay">
+          <tr class="tr-header">
+            <td>Produk</td>
+            <td>SKU</td>
+            <td>Harga Reseller</td>
+            <td>Harga Distributor</td>
+          </tr>
+          <tr>
+            <td>Produk 1</td>
+            <td>SKU001</td>
+            <td>$100</td>
+            <td>$80</td>
+          </tr>
+          <tr>
+            <td>Produk 2</td>
+            <td>SKU002</td>
+            <td>$200</td>
+            <td>$160</td>
+          </tr>
+          <tr>
+            <td>Produk 3</td>
+            <td>SKU003</td>
+            <td>$150</td>
+            <td>$120</td>
+          </tr>
+          <tr>
+            <td>Produk 4</td>
+            <td>SKU001</td>
+            <td>$100</td>
+            <td>$80</td>
+          </tr>
+          <tr class="highlight">
+            <td>Produk 5</td>
+            <td>SKU002</td>
+            <td>$200</td>
+            <td>$160</td>
+          </tr>
+          <tr>
+            <td>Produk 6</td>
+            <td>SKU003</td>
+            <td>$150</td>
+            <td>$120</td>
+          </tr>
+        </table>
+      </div>
+
+      <p style="display: none" id="jsonData"></p>
+
+      <script>
+        function copyJSON() {
+          const jsonData = document.getElementById("jsonData").textContent;
+          navigator.clipboard
+            .writeText(jsonData)
+            .then(() => {
+              console.log("JSON copied to clipboard");
+            })
+            .catch((err) => {
+              console.error("Faield to copy JSON", err);
+            });
+        }
+      </script>
+    </div>
+  </body>
+</html>
